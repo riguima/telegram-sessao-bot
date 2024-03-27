@@ -1,4 +1,5 @@
 import os
+import shutil
 from pathlib import Path
 from random import choice
 
@@ -22,12 +23,18 @@ if __name__ == '__main__':
                     )
                     for _ in range(payment.session_amount):
                         filename = choice(os.listdir('sessoes-a-venda'))
-                        message = bot.send_document(
-                            int(payment.chat_id),
-                            open(Path('sessoes-a-venda') / filename, 'rb'),
-                        )
                         os.rename(
                             Path('sessoes-a-venda') / filename,
+                            Path('sessoes') / 'sessoes' / filename,
+                        )
+                        shutil.make_archive('sessoes', 'zip', 'sessoes')
+                    message = bot.send_document(
+                        int(payment.chat_id), open('sessoes.zip', 'rb')
+                    )
+                    os.remove('sessoes.zip')
+                    for filename in os.listdir(Path('sessoes') / 'sessoes'):
+                        os.rename(
+                            Path('sessoes') / 'sessoes' / filename,
                             Path('sessoes-vendidas') / filename,
                         )
                     start(message)

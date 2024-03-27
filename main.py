@@ -86,7 +86,10 @@ def buy_session_action(callback_query):
 
 def on_session_amount(message):
     try:
-        if int(message.text) > len(os.listdir('sessoes-a-venda')) or int(message.text) <= 0:
+        if (
+            int(message.text) > len(os.listdir('sessoes-a-venda'))
+            or int(message.text) <= 0
+        ):
             bot.send_message(
                 message.chat.id,
                 f'Digite uma quantidade de 1 a {len(os.listdir("sessoes-a-venda"))}',
