@@ -25,3 +25,5 @@ pip install -r requirements.txt
 ```
 
 Rode com `python main.py && python mercado_pago.py`
+
+Na pasta `sessoes-a-venda` coloque todos os arquivos de sessão que estão disponiveis para compra, automaticamente serão movidas para a pasta `sessoes-vendidas` quando o pagamento for confirmado
