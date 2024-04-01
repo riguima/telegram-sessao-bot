@@ -12,6 +12,7 @@ BOT_TOKEN = "telegram_bot_token"
 DATABASE_URI = "sqlite:///database.db" # URI do banco de dados
 PAYER_EMAIL = "email_do_pagador"
 SESSION_PRICE = 4.5 # Valor de cada sessão
+START_MESSAGE = "Mensagem quando der /start"
 ```
 
 Segue script de instalação:
@@ -19,6 +20,7 @@ Segue script de instalação:
 ```
 git clone https://github.com/riguima/telegram-session-bot
 cd telegram-session-bot
+mkdir -p sessoes/sessoes sessoes-a-venda sessoes-vendidas
 pip install -r requirements.txt
 ```
 

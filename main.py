@@ -19,17 +19,11 @@ mercado_pago_sdk = mercadopago.SDK(config['MERCADO_PAGO_ACCESS_TOKEN'])
 def start(message):
     bot.send_message(
         message.chat.id,
-        'Bem vindo a Leadsstore, um dos melhores fornecedores de sessões para telegram do Brasil. Por favor, se tiver dúvidas, contate o suporte, temos sessões novas todos os dias.\n\nAs sessões são criadas e vendidas apenas para uma única pessoa, quando você compra, ela é removida do bot. Elas também são criadas utilizando API ID e HASH nossas para melhor qualidade das contas.',
+        config['START_MESSAGE'],
         reply_markup=quick_markup(
             {
                 '📊 Tabela de valores': {'callback_data': 'price_table'},
                 '📦 Comprar sessão': {'callback_data': 'buy_session'},
-                'Suporte': {
-                    'url': 'https://api.whatsapp.com/send?phone=5584998493595'
-                },
-                'Canal do Youtube': {
-                    'url': 'https://www.youtube.com/channel/UCuK62MxQZFulRALHMq6hS9w'
-                },
             },
             row_width=1,
         ),
@@ -40,7 +34,7 @@ def start(message):
 def price_table(callback_query):
     bot.send_message(
         callback_query.message.chat.id,
-        '📋 Tabelas de valores :\n\n📊 Todas as contas são verificadas:\n💵 O valor por unidade é: R$ 4,50\n\nBoas compras 😊',
+        f'📋 Tabelas de valores :\n\n📊 Todas as contas são verificadas:\n💵 O valor por unidade é: R$ {config["SESSION_PRICE"]:.2f}\n\nBoas compras 😊'.replace('.', ','),
         reply_markup=quick_markup(
             {
                 'Voltar 🔙': {'callback_data': 'return'},
